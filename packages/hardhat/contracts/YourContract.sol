@@ -19,15 +19,11 @@ contract YourContract is Ownable {
     _;
   }
 
-  // string public purpose = "Building Unstoppable Apps!!!";
-
   constructor(address _successor) payable {
     successor = _successor;
     aliveTill = block.number;
     emit UpdateSuccessor(owner(), successor);
   }
-
-  // still alive function wtihin 10 blocks time
 
   function stillAlive() public onlyOwner {
     uint256 currentBlock = block.number;
@@ -51,8 +47,7 @@ contract YourContract is Ownable {
       require(success, 'Eth transfer failed');
     }
 
-    // Send back rest of the crypto assets
-    // emptyTokens();
+    // Need to add functionality to transfer crypto assets
   }
 
   function updateSuccessor(address newSuccessor) public onlyOwner {
