@@ -14,11 +14,6 @@ contract YourContract is Ownable {
   address public successor;
   uint256 public aliveTill; 
 
-  modifier onlySuccessor() {
-    require(msg.sender == successor, 'Invalid Successor');
-    _;
-  }
-
   constructor(address _successor) payable {
     successor = _successor;
     aliveTill = block.number;
@@ -36,7 +31,7 @@ contract YourContract is Ownable {
     }
   }
 
-  function emptyFunds() public onlySuccessor {
+  function emptyFunds() public {
     uint256 currentBlock = block.number;
     require(currentBlock - aliveTill > 10, 'Still Alive');
 
@@ -57,5 +52,4 @@ contract YourContract is Ownable {
 
   // to support receiving ETH by default
   receive() external payable {}
-  fallback() external payable {}
 }
